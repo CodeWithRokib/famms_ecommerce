@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,4 @@ Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 
 
 //backend
-Route::get('/Dashboard',[Dashboard::class,'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('pages.bashboard');
