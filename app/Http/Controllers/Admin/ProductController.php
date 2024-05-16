@@ -50,7 +50,6 @@ class ProductController extends Controller
             // Handle potential database errors during product creation
             return back()->withErrors(['error' => $e->getMessage()]);
         }
-   
        }
     
 }

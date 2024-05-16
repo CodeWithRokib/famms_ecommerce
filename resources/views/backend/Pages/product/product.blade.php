@@ -22,12 +22,51 @@
 
                 <!-- products -->
                 <div class="card">
-                    <div class="table-responsive">
-                        <div class="card-body" id="show_all_product">
-                            <h3 class="text-center text-secondary my-5">Loading...</h3>
-                        </div>
+                    <div class="card-body table-responsive">
+                        <table  class="table table-striped table-sm text-center align-middle" id="datatable" >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category Name</th>
+                                    <th>Scategory Name</th>
+                                    <th>Product Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Description</th>
+                                    <th>Code</th>
+                                    <th>Discount</th>
+                                    <th>Image</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach ($products as $product)
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $product->category_name }}</td>
+                                        <td>{{ $product->subcategory_name }}</td>
+                                        <td>{{ $product->name }}</td>
+                                        <td>{{ $product->price }}</td>
+                                        <td>{{ $product->quantity }}</td>
+                                        <td>{{ $product->description }}</td>
+                                        <td>{{ $product->code }}</td>
+                                        <td>{{ $product->discount }}</td>
+                                        <th> <img src="{{ asset('storage/' . $product->image) }}" style="height: 100px; width:100px;" class="card-img" alt=""></th>
+                                        <td>{{ $product->status }}</td>
+                                        <td>
+                                         <a href="#" id="" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editCategoryModal"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
+                                        
+                                         <a href="#" id="" class="text-danger mx-1 deleteIcon"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                    <!-- /products-->
                 </div>
             </div>
         </div>
@@ -44,7 +83,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('product.store')}}" method="POST">
+                    <form action="{{route('product.store')}}" method="POST"  enctype="multipart/form-data">
                         @csrf
                         <div class="service-fields mb-3">
                             <div class="row">
