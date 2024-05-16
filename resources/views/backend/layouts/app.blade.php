@@ -41,7 +41,7 @@
     <!-- <script src="{{asset('backend/js/theme-settings.js')}}"></script> -->
     <script src="{{asset('backend/js/app.js')}}"></script>
     <script src="{{asset('backend/js/select2.min.js')}}"></script>
-    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script>
+    {{-- <script src="{{asset('vendor/sweetalert/sweetalert.all.js')}}"></script> --}}
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
     <!-- {{--    datatables js--}} -->

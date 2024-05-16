@@ -6,8 +6,10 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,5 +34,17 @@ Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 
 
-//backend
+                                 //backend
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('pages.bashboard');
+
+                                 //product route
+Route::get('/add/product', [ProductController::class, 'index2'])->name('pages.product');
+Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+
+                                 //Category route
+Route::get('/category', [CategoryController::class, 'index'])->name('pages.category');
+Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+
+                                 //Sub Category route
+Route::get('/subcategory', [SubCategoryController::class, 'index'])->name('pages.subcategory');
+Route::post('/subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');

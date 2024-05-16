@@ -20,11 +20,14 @@
 
                 {{-- @if (Auth::user()->role == 'admin') --}}
                     <li> 
-                        <a  class="sidebar-categories"><i class="la la-layer-group"></i> <span>Categories</span></a>
+                        <a href="{{route('pages.category')}}" class="sidebar-categories"><i class="la la-layer-group"></i> <span>Categories</span></a>
+                    </li>
+                    <li> 
+                        <a href="{{route('pages.subcategory')}}" class="sidebar-categories"><i class="la la-layer-group"></i> <span>Sub Categories</span></a>
                     </li>
 
                 <li> 
-                    <a  class="sidebar-supplier"><i class="la la-people-carry"></i> <span>Supplier</span></a>
+                    <a href="{{route('pages.product')}}" class="sidebar-supplier"><i class="la la-people-carry"></i> <span>Add Product</span></a>
                 </li>
 
                 <li class="submenu">
