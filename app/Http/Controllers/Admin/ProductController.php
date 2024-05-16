@@ -13,7 +13,8 @@ class ProductController extends Controller
 {
     //
     public function index(){
-        return view('frontend.product.product');
+        $products = Product::all();
+        return view('frontend.product.product', compact('products'));
     }
     public function index2(){
         $subcategories = SubCategory::all();
@@ -50,6 +51,12 @@ class ProductController extends Controller
             // Handle potential database errors during product creation
             return back()->withErrors(['error' => $e->getMessage()]);
         }
+       }
+
+       public function show($id)
+       {
+           $product = Product::find($id);
+           return view('frontend.product.productdetails', compact('product'));
        }
     
 }

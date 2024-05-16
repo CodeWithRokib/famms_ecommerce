@@ -27,9 +27,10 @@ use App\Http\Controllers\Admin\SubCategoryController;
 // });
 
 
-Route::get('/ ',[HomeController::class,'index'])->name('home');
-Route::get('/about',[AboutController::class,'index'])->name('about');
+Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/about',[AboutController::class, 'index'])->name('about');
 Route::get('/product',[ProductController::class, 'index'])->name('product');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 
