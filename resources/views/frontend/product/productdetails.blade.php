@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container heading_container heading_center">
     <h2>Product Details</h2>
 
     <div class="card mb-3">
@@ -25,6 +25,16 @@
                         <p class="card-text"><small class="text-muted">Code: {{ $product->code }}</small></p>
                         <p class="card-text"><small class="text-muted">Discount: {{ $product->discount }}%</small></p>
                         <p class="card-text"><small class="text-muted">Status: {{ ucfirst($product->status) }}</small></p>
+                          <!-- Add to Cart Form -->
+                          <form action="{{ route('cart.add') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <div class="form-group">
+                                <label for="quantity">Quantity</label>
+                                <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        </form>
                     @else
                         <p class="card-text">Product not found.</p>
                     @endif

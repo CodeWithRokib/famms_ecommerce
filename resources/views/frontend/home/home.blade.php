@@ -377,42 +377,55 @@ home
      
      <!-- product section -->
      <section class="product_section layout_padding">
-        <div class="container">
-           <div class="heading_container heading_center">
+      <div class="container">
+          <div class="heading_container heading_center">
               <h2>
-                 Our <span>products</span>
+                  Our <span>products</span>
               </h2>
-           </div>
-           <div class="row">
-            @foreach ($products as $product)
-            <div class="col-sm-6 col-md-4 col-lg-3 mr">
-               <div class="box">
-                  <div class="option_container">
-                     <div class="options">
-                        <a href="" class="option1">Add To Cart</a>
-                        <a href="{{ route('product.show', $product->id) }}" class="option2"> Details </a>
-                                   
-                     </div>
+          </div>
+
+          <div class="row">  
+              @foreach ($products as $product)     
+                  <div class="col-sm-6 col-md-4 col-lg-3 p-5" style="margin-right: 5px;">
+                      <div class="box">
+                          <div class="option_container">
+                              <div class="options">
+                                  <form action="{{ route('cart.add') }}" method="POST">
+                                      @csrf
+                                      <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                      <div class="form-group">
+                                          <label type="hidden" for="quantity"></label>
+                                          <input type="hidden" name="quantity" id="quantity" class="form-control" value="1" min="1">
+                                      </div>
+                                      <button type="submit" class="option1 rounded-pill">Add to Cart</button>
+                                  </form>
+                                 
+
+                                      <a href="{{ route('product.show', $product->id) }}" class="option2"> Details </a>
+                                 
+                            
+                              </div>
+                          </div>
+                          <div class="img-box">
+                              <img src="{{ asset('storage/' . $product->image) }}"  alt="">
+
+                          </div>
+                          <div class="detail-box">
+                              <h5>{{ $product->name ?? '' }}</h5>
+                              <h6>{{ $product->price ?? '' }}</h6>
+                          </div>
+                      </div>
+
                   </div>
-                  <div class="img-box">
-                   <img src="{{ asset('storage/' . $product->image) }}"  alt="">
-                  </div>
-                  <div class="detail-box">
-                     <h5>{{$product->name}}</h5>
-                     <h6>{{$product->price}}</h6>
-                  </div>
-               </div>
-            </div>
-            @endforeach 
-              </div>
-           </div>
-           <div class="btn-box">
-              <a href="">
+                  @endforeach
+             </div>
+      <div class="btn-box">
+          <a href="">
               View All products
-              </a>
-           </div>
-        </div>
-     </section>
+          </a>
+      </div>
+      </div>
+  </section>
      <!-- end product section -->
 
      <!-- subscribe section -->

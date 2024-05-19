@@ -26,38 +26,23 @@
                     Our <span>products</span>
                 </h2>
             </div>
-            <div class="row">
-                {{-- <div class="col-sm-6 col-md-4 col-lg-3">
-                 <div class="box">
-                    <div class="option_container">
-                       <div class="options">
-                          <a href="" class="option1">
-                          Men's Shirt
-                          </a>
-                          <a href="" class="option2">
-                          Buy Now
-                          </a>
-                       </div>
-                    </div>
-                    <div class="img-box">
-                       <img src="images/p1.png" alt="">
-                    </div>
-                    <div class="detail-box">
-                       <h5>
-                          Men's Shirt
-                       </h5>
-                       <h6>
-                          $75
-                       </h6>
-                    </div>
-                 </div>
-              </div> --}}
-                @foreach ($products as $product)
-                    <div class="col-sm-6 col-md-4 col-lg-3">
+
+            <div class="row">  
+                @foreach ($products as $product)     
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-5" style="margin-right: 5px;">
                         <div class="box">
                             <div class="option_container">
                                 <div class="options">
-                                    <a href="" class="option1">Add To Cart</a>
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        <div class="form-group">
+                                            <label type="hidden" for="quantity"></label>
+                                            <input type="hidden" name="quantity" id="quantity" class="form-control" value="1" min="1">
+                                        </div>
+                                        <button type="submit" class="option1 rounded-pill">Add to Cart</button>
+                                    </form>
+                                   
 
                                         <a href="{{ route('product.show', $product->id) }}" class="option2"> Details </a>
                                    
@@ -73,10 +58,10 @@
                                 <h6>{{ $product->price ?? '' }}</h6>
                             </div>
                         </div>
+
                     </div>
-                @endforeach
-            </div>
-        </div>
+                    @endforeach
+               </div>
         <div class="btn-box">
             <a href="">
                 View All products
