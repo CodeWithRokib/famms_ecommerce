@@ -6,62 +6,52 @@ contact
 @section('content')
 
 <div class="container">
-    <h2>Shopping Cart</h2>
-
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-
-    @if(count($cart) > 0)
-        <table class="table table-bordered">
+    <div class="container py-4">
+        <h2>Your Cart</h2>
+      
+        @if ($cart && $cart->cartItems->count() > 0)
+          <table class="table table-striped table-hover">
             <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Actions</th>
-                </tr>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+              </tr>
             </thead>
             <tbody>
-                @foreach($cart as $id => $item)
-                    <tr>
-                        <td><img src="{{ asset('storage/' . $item['image']) }}" alt="{{ $item['name'] }}" width="50"></td>
-                        <td>{{ $item['name'] }}</td>
-                        <td>{{ $item['quantity'] }}</td>
-                        <td>${{ $item['price'] }}</td>
-                        <td>${{ $item['price'] * $item['quantity'] }}</td>
-                        <td>
-                            <form action="{{ route('cart.update') }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $id }}">
-                                <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1" style="width: 60px;">
-                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                            </form>
-                            <form action="{{ route('cart.remove') }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                <input type="hidden" name="product_id" value="{{ $id }}">
-                                <button type="submit" class="btn btn-sm btn-danger">Remove</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @else
-        <p>Your cart is empty.</p>
-    @endif
+              @foreach ($cart->cartItems as $item)
+                <tr>
+                  <td>{{ $item->product->name }}</td>
+                  <td> {{ $item->quantity }} </td>
+                  <td>${{ $item->product->price * $item->quantity }}</td>
 
-    <a href="{{ route('product') }}" class="btn btn-primary">Continue Shopping</a>
-</div>
+                  <td>
+                    <form action="{{ route('cart.remove', $item->id) }}" method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-sm btn-danger">Remove</button>
+                    </form>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+      
+          <div class="row">
+            <div class="col-md-6">
+              </div>
+            <div class="col-md-6 text-right">
+              <form action="{{ route('orders.create') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary float-right">Checkout</button>
+              </form>
+            </div>
+          </div>
+      
+        @else
+          <p class="text-center">Your cart is empty.</p>
+        @endif
+      </div>
 
 @endsection

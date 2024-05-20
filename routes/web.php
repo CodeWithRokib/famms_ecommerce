@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CartController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\SubCategoryController;
 
 /*
@@ -57,7 +58,17 @@ Route::post('/category', [CategoryController::class, 'store'])->name('category.s
 Route::get('/subcategory', [SubCategoryController::class, 'index'])->name('pages.subcategory');
 Route::post('/subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
 
-Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
-Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
-Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+// Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+// Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+// Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+// Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::delete('/cart/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
+
+    Route::post('/orders', [OrderController::class, 'createOrder'])->name('orders.create');
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+});
