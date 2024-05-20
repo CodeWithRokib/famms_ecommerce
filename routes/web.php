@@ -6,6 +6,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -27,6 +28,11 @@ use App\Http\Controllers\Admin\SubCategoryController;
 //     return view('welcome');
 // });
 
+
+Route::get('/register',[UserController::class, 'loadRegister']);
+Route::post('/register',[UserController::class, 'register'])->name('register.store');
+Route::get('/login',[UserController::class,'loadLogin'])->name('login.page');
+Route::post('/login',[UserController::class,'userLogin'])->name('login');
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/about',[AboutController::class, 'index'])->name('about');

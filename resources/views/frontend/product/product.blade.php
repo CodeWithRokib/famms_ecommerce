@@ -29,7 +29,7 @@
 
             <div class="row">  
                 @foreach ($products as $product)     
-                    <div class="col-sm-6 col-md-4 col-lg-3 p-5" style="margin-right: 5px;">
+                    <div class="col-sm-6 col-md-4 col-lg-3 p-5">
                         <div class="box">
                             <div class="option_container">
                                 <div class="options">
@@ -50,7 +50,8 @@
                                 </div>
                             </div>
                             <div class="img-box">
-                                <img src="{{ asset('storage/' . $product->image) }}"  alt="">
+                                {{-- <img src="{{ asset('storage/' . $product->image) }}"  alt=""> --}}
+                                <img src="{{ asset('storage/' . $product->image) }}" class="card-img" alt="{{ $product->name }}">
 
                             </div>
                             <div class="detail-box">
