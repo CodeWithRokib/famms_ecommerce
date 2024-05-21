@@ -13,9 +13,9 @@
                         <li><a href="{{ url('admin/dashboard')}}">Dashboard</a></li>
                     </ul>
                 </li> --}}
-
+                @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN || auth()->user()->role == \App\Models\User::ROLE_SUPERADMIN)
                 <li> 
-                    <a  class="sidebar-dashboard"><i class="la la-home"></i> <span>Dashboard</span></a>
+                    <a  class="sidebar-dashboard"><i class="la la-home"></i> <span>Admin Dashboard</span></a>
                 </li>
 
                 {{-- @if (Auth::user()->role == 'admin') --}}
@@ -99,6 +99,17 @@
                     <a href="{{route('users.profile')}}" class="sidebar-users_profile"><i class="la la-user-circle"></i> <span>Profile</span></a>
                 </li> --}}
 
+               
+                
+                <!-- Admin-specific content -->
+               @else
+                <p>You do not have access to this section.</p>
+                @endif
+
+                {{-- @if(auth()->user()->role == \App\Models\User::ROLE_ADMIN)
+                @elseif(auth()->user()->role == \App\Models\User::ROLE_SUPERADMIN)
+                @else
+                @endif --}}
             </ul>
         </div>
     </div>

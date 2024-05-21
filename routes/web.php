@@ -43,20 +43,7 @@ Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
 
 
-                                 //backend
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('pages.bashboard');
 
-                                 //product route
-Route::get('/add/product', [ProductController::class, 'index2'])->name('pages.product');
-Route::post('/product', [ProductController::class, 'store'])->name('product.store');
-
-                                 //Category route
-Route::get('/category', [CategoryController::class, 'index'])->name('pages.category');
-Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
-
-                                 //Sub Category route
-Route::get('/subcategory', [SubCategoryController::class, 'index'])->name('pages.subcategory');
-Route::post('/subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
 
 // Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 // Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
@@ -71,4 +58,21 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/orders', [OrderController::class, 'createOrder'])->name('orders.create');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+});
+
+Route::middleware(['auth', 'role:admin,super admin'])->group(function () {
+                                     //backend
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('pages.bashboard');
+
+    //product route
+    Route::get('/add/product', [ProductController::class, 'index2'])->name('pages.product');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+
+    //Category route
+    Route::get('/category', [CategoryController::class, 'index'])->name('pages.category');
+    Route::post('/category', [CategoryController::class, 'store'])->name('category.store');
+
+    //Sub Category route
+    Route::get('/subcategory', [SubCategoryController::class, 'index'])->name('pages.subcategory');
+    Route::post('/subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
 });
