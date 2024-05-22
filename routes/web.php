@@ -7,6 +7,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -58,6 +59,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/orders', [OrderController::class, 'createOrder'])->name('orders.create');
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+
+    Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+
 });
 
 Route::middleware(['auth', 'role:admin,super admin'])->group(function () {
