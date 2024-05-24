@@ -83,6 +83,7 @@
 @else
 <p><a href="{{ route('login') }}">Log in</a> to add a review.</p>
 @endauth
-    </div>
+</div>
+ </div>
 
 @endsection

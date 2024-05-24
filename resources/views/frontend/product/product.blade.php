@@ -46,7 +46,11 @@
 
                                         <a href="{{ route('product.show', $product->id) }}" class="option2"> Details </a>
                                    
-                              
+                                        <form action="{{ route('wishlist.store') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                            <button type="submit" class="option2 rounded-pill">Add to Wishlist</button>
+                                        </form>
                                 </div>
                             </div>
                             <div class="img-box">
